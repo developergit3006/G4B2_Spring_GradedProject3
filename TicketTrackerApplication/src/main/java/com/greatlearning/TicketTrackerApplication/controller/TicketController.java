@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.greatlearning.TicketTrackerApplication.entity.Ticket;
@@ -69,30 +68,30 @@ public class TicketController {
 		ticketService.deleteTicket(id);
 		return "redirect:/tickets";
 	}
-	
+
 	@GetMapping("/tickets/search")
 	public String searchTickets(@RequestParam(name = "query") String query, Model model) {
-	    List<Ticket> searchResults;
-	    String errorMessage = null;
-	    try {
-	    	Integer ticketId = Integer.parseInt(query);
-	        // If the query can be parsed into a Long, search by ID
-	        Optional<Ticket> ticketOptional = ticketService.getTicketByTheId(ticketId);
-	        if (ticketOptional.isPresent()) {
-	            searchResults = Collections.singletonList(ticketOptional.get());
-	        } else {
-	            searchResults = Collections.emptyList();
-	            errorMessage = "Ticket with ID " + ticketId + " not found.";
-	        }
-	    } catch (NumberFormatException e) {
-	        // If parsing as Long fails, search by title
-	        searchResults = ticketService.searchTickets(query);
-	        if (searchResults.isEmpty()) {
-	            errorMessage = "No tickets found with title: " + query;
-	        }
-	    }
-	    model.addAttribute("tickets", searchResults);
-	    model.addAttribute("errorMessage", errorMessage);
-	    return "tickets";
+		List<Ticket> searchResults;
+		String errorMessage = null;
+		try {
+			Integer ticketId = Integer.parseInt(query);
+			// If the query can be parsed into a Long, search by ID
+			Optional<Ticket> ticketOptional = ticketService.getTicketByTheId(ticketId);
+			if (ticketOptional.isPresent()) {
+				searchResults = Collections.singletonList(ticketOptional.get());
+			} else {
+				searchResults = Collections.emptyList();
+				errorMessage = "Ticket with ID " + ticketId + " not found.";
+			}
+		} catch (NumberFormatException e) {
+			// If parsing as Long fails, search by title
+			searchResults = ticketService.searchTickets(query);
+			if (searchResults.isEmpty()) {
+				errorMessage = "No tickets found with title: " + query;
+			}
+		}
+		model.addAttribute("tickets", searchResults);
+		model.addAttribute("errorMessage", errorMessage);
+		return "tickets";
 	}
 }

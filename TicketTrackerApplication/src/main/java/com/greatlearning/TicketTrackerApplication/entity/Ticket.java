@@ -1,10 +1,8 @@
 package com.greatlearning.TicketTrackerApplication.entity;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -33,9 +31,9 @@ public class Ticket {
 
 	@Column(name = "Ticket_Description")
 	private String description;
-	
+
 	@Column(name = "content")
-    private String content;
+	private String content;
 
 	@CreationTimestamp
 	@Column(name = "created_date")

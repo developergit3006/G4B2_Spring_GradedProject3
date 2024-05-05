@@ -9,10 +9,9 @@ import org.springframework.stereotype.Service;
 import com.greatlearning.TicketTrackerApplication.entity.Ticket;
 import com.greatlearning.TicketTrackerApplication.repository.TicketRepository;
 
-
 @Service
 public class TicketServiceImpl implements TicketService {
-	
+
 	@Autowired
 	TicketRepository ticketRepository;
 
@@ -49,12 +48,11 @@ public class TicketServiceImpl implements TicketService {
 
 	@Override
 	public List<Ticket> searchTickets(String query) {
-	    return ticketRepository.findByTitleContainingOrDescriptionContaining(query, query);
+		return ticketRepository.findByTitleContainingOrDescriptionContaining(query, query);
 	}
 
-	
 	@Override
 	public Optional<Ticket> getTicketByTheId(Integer id) {
-	    return ticketRepository.findById(id);
+		return ticketRepository.findById(id);
 	}
 }

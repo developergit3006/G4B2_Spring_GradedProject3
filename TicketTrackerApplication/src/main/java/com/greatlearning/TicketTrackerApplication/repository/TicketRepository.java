@@ -8,6 +8,4 @@ import com.greatlearning.TicketTrackerApplication.entity.Ticket;
 
 public interface TicketRepository extends JpaRepository<Ticket, Integer> {
 	List<Ticket> findByTitleContainingOrDescriptionContaining(String query, String query2);
-
-
 }
